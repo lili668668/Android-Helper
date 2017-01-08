@@ -92,11 +92,12 @@ public class TestASRActivity extends AppCompatActivity {
 
         tts.speak(list.get(0), TextToSpeech.QUEUE_FLUSH, null, "test");
 
-        Intent sendKeep = new Intent();
+        Intent sendKeep = context.getPackageManager().getLaunchIntentForPackage("com.google.android.keep");
         sendKeep.setAction(Intent.ACTION_SEND);
         sendKeep.putExtra(Intent.EXTRA_TEXT, list.get(0));
         sendKeep.setType("text/plain");
-        startActivity(Intent.createChooser(sendKeep, "choose"));
+
+        startActivity(sendKeep);
     }
 
     private boolean hasRecognizer() {
