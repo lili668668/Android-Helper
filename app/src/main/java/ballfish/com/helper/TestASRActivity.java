@@ -88,13 +88,15 @@ public class TestASRActivity extends AppCompatActivity {
         }
 
         List<String> list = it.getStringArrayListExtra(RecognizerIntent.EXTRA_RESULTS);
-        text.setText(list.get(0));
+        String res = list.get(0);
 
-        tts.speak(list.get(0), TextToSpeech.QUEUE_FLUSH, null, "test");
+        text.setText(res);
+
+        tts.speak(res, TextToSpeech.QUEUE_FLUSH, null, "test");
 
         Intent sendKeep = context.getPackageManager().getLaunchIntentForPackage("com.google.android.keep");
         sendKeep.setAction(Intent.ACTION_SEND);
-        sendKeep.putExtra(Intent.EXTRA_TEXT, list.get(0));
+        sendKeep.putExtra(Intent.EXTRA_TEXT, res);
         sendKeep.setType("text/plain");
 
         startActivity(sendKeep);
@@ -105,4 +107,6 @@ public class TestASRActivity extends AppCompatActivity {
         List<ResolveInfo> list = pm.queryIntentActivities(asr, PackageManager.MATCH_DEFAULT_ONLY);
         return list.size() != 0;
     }
+
+    private  
 }
